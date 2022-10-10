@@ -64,7 +64,7 @@ if [ "$platform" == "Linux" ]
             else
                 export CC="$(which musl-gcc 2>/dev/null)"
         fi
-        NEWCFLAGS="-static -static-libgcc -static-libstdc++"
+        NEWCFLAGS="-static"
         NEWLDFLAGS='-all-static'
     else
         echo "= WARNING: your platform does not support static binaries."
