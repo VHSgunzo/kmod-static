@@ -36,7 +36,7 @@ mkdir build
 mkdir release
 pushd build
 
-# download tarballs
+# download kmod
 echo "= downloading kmod v${kmod_version}"
 git clone https://github.com/kmod-project/kmod.git kmod-${kmod_version}
 
