@@ -64,8 +64,8 @@ if [ "$platform" == "Linux" ]
             else
                 export CC="$(which musl-gcc 2>/dev/null)"
         fi
-        NEWCFLAGS="-static"
-        NEWLDFLAGS='-all-static'
+        export CFLAGS="-static"
+        export LDFLAGS='--static'
     else
         echo "= WARNING: your platform does not support static binaries."
         echo "= (This is mainly due to non-static libc availability.)"
@@ -73,9 +73,9 @@ fi
 
 echo "= building kmod"
 pushd kmod-${kmod_version}
-CFLAGS="$NEWCFLAGS -g -O2 -Os -ffunction-sections -fdata-sections" ./autogen.sh
-./configure CC="$CC" CFLAGS="$NEWCFLAGS -g -O2 -Os -ffunction-sections -fdata-sections" LDFLAGS="$NEWCFLAGS -Wl,--gc-sections"
-CFLAGS="$NEWCFLAGS -g -O2 -Os -ffunction-sections -fdata-sections" make LDFLAGS="$NEWLDFLAGS -Wl,--gc-sections"
+CFLAGS="$CFLAGS -g -O2 -Os -ffunction-sections -fdata-sections" ./autogen.sh
+./configure CC="$CC" CFLAGS="$CFLAGS -g -O2 -Os -ffunction-sections -fdata-sections" LDFLAGS="$LDFLAGS -Wl,--gc-sections"
+CFLAGS="$CFLAGS -g -O2 -Os -ffunction-sections -fdata-sections" make LDFLAGS="$LDFLAGS -Wl,--gc-sections"
 popd # kmod-${kmod_version}
 
 popd # build
